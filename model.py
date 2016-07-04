@@ -13,28 +13,24 @@ class Temperature(db.Model):
 	__tablename__ = "temperatures"
 
 	temperature_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	year = db.Column(db.Integer(4), nullable=False)
-	month = db.Column(db.Integer(3), nullable=False)
-	celsius = db.Column(db.Float, nullable=True)
-	annual_mean_j_d = db.Column(db.Integer, nullable=True)
-	annual_mean_d_n = db.Column(db.Integer, nullable=True)
-	djf = db.Column(db.Integer, nullable=True)
-	mam = db.Column(db.Integer, nullable=True)
-	jja = db.Column(db.Integer, nullable=True)
-	son = db.Column(db.Integer, nullable=True)
+	year = db.Column(db.String(4), nullable=False)
+	month = db.Column(db.String(3), nullable=False)
+	celsius = db.Column(db.String, nullable=True)
+	annual_mean_j_d = db.Column(db.String, nullable=True)
+	annual_mean_d_n = db.Column(db.String, nullable=True)
 
-class CarbonLevels(db.Model):
+class CarbonLevel(db.Model):
 	"""Stores carbon dioxide levels by date"""
 
 	__tablename__ = "carbonlevels"
 
 	carbon_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-	year = db.Column(db.Integer, nullable=False)
-	month = db.Column(db.Integer, nullable=False)
-	average = db.Column(db.Integer, nullable=True)
-	interpolated = db.Column(db.Integer, nullalbe=True)
-	season_corr = db.Column(db.Float, nullable=True)
-	daily = db.Column(db.Integer, nullable=True)
+	year = db.Column(db.String, nullable=False)
+	month = db.Column(db.String, nullable=False)
+	average = db.Column(db.String, nullable=True)
+	interpolated = db.Column(db.String, nullable=True)
+	season_corr = db.Column(db.String, nullable=True)
+	daily = db.Column(db.String, nullable=True)
 
 ############################################
 # Helper functions
@@ -42,7 +38,7 @@ class CarbonLevels(db.Model):
 def connect_to_db(app):
 	"""Connects the database to our Flask app"""
 
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///global_warming'
+	app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///warming'
 	db.app = app
 	db.init_app(app)
 
